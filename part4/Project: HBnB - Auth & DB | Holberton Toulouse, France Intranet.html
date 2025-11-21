@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="google" content="notranslate">
+    <title>Project: HBnB - Auth &amp; DB | Holberton Toulouse, France Intranet</title>
+      <link rel="stylesheet" href="https://use.typekit.net/xgz4ilr.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+      <link rel="stylesheet" href="/assets/application-7eb9b1e48427cd1bd28dbc513b5724dbd9fef87b6f1da03bb757f217b94f7ded.css" media="all" />
+      <script src="https://www.gstatic.com/charts/loader.js"></script>
+      <meta name="action-cable-url" content="/cable" />
+      <script src="/assets/application-e8060078ef65b06b5085ff1f8f71a12a7f9c22ee3570dfb42716a695449aecaa.js"></script>
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="n_qQlTRo9R1JQIUv1Zc2yngfQJPaC-fd5hQReysgx4Cd_lpNe9WbRJJoUp_rNL-orvS5Wb_oIdJelRLVHL0dZA" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+      <!-- Select2 -->
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Store user timezone -->
+      <script>
+        Cookies.set('timezone', (new Date()).getTimezoneOffset() / -60.0);
+      </script>
+      <!-- ChatBot -->
+        <link rel="stylesheet" href="https://clippy.hbtn.io/static/client/css/all.min.css">
+        <script src="https://clippy.hbtn.io/static/client/js/all.min.js"></script>
+      <!-- intro.js for interactive onboarding -->
+        <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" media="screen" />
+      <!-- React -->
+      <script src="/packs/js/application-a11dd345dbcdb51e5094.js"></script>
+      <link rel="stylesheet" href="/packs/css/application-67dc439c.css" media="screen" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body class="
+    signed_in
+    env_production
+    
+    "
+    translate="no"
+    class="notranslate"
+    data-theme-suffix=""
+    data-checker-special-theme="">
+      <input type="hidden" id="hbtn-slack-url" value="https://holberton-school-org.slack.com">
+      <nav class="navbar navbar-default navbar-fixed-top topbar visible-xs">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <a class="navbar-brand" href="/">
+      <div class="logo"></div>
+</a>  </div>
+
+  <div class="collapse navbar-collapse navigation" id="navbar-mobile">
+    <ul class="nav navbar-nav">
+      
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Help">
+      <a target="_blank" href="https://students-support.hbtn.io/hc">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-info-circle "></i>
+        </div>
+        <div class="visible-xs">Help</div>
+</a>    </li>
+
+
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Projects" id="sidebar-current-projects-item">
+      <a href="/projects/current">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-code-fork "></i>
+        </div>
+        <div class="visible-xs">Projects</div>
+</a>    </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="My reports">
+        <a href="/users/my_reports">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-sticky-note-o "></i>
+          </div>
+          <div class="visible-xs">My reports</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="QA Reviews I can make">
+        <a href="/corrections/to_review">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-check "></i>
+          </div>
+          <div class="visible-xs">QA Reviews I can make</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Mock interviews">
+        <a href="/dashboards/my_current_reefineries">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-commenting-o "></i>
+          </div>
+          <div class="visible-xs">Mock interviews</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Evaluation quizzes">
+        <a href="/dashboards/my_current_evaluation_quizzes">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-question "></i>
+          </div>
+          <div class="visible-xs">Evaluation quizzes</div>
+</a>      </li>
+
+    <hr title="My resources">
+
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Concepts" id="sidebar-concepts-item">
+      <a href="/concepts">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-file-text "></i>
+        </div>
+        <div class="visible-xs">Concepts</div>
+</a>    </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Servers">
+        <a href="/servers">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-server "></i>
+          </div>
+          <div class="visible-xs">Servers</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Sandboxes" id="sidebar-dashboards-my-containers">
+        <a href="/user_sandboxes">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-terminal "></i>
+          </div>
+          <div class="visible-xs">Sandboxes</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Tools">
+        <a href="/dashboards/my_tools">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-wrench "></i>
+          </div>
+          <div class="visible-xs">Tools</div>
+</a>      </li>
+
+      <hr title="My campus">
+
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Peers">
+          <a href="/users/peers">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-users "></i>
+            </div>
+            <div class="visible-xs">Peers</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Captain's Logs">
+          <a href="/dashboards/my_captain_log">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-book "></i>
+            </div>
+            <div class="visible-xs">Captain's Logs</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Officers">
+          <a href="/dashboards/my_officers">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-building "></i>
+            </div>
+            <div class="visible-xs">Officers</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Speakers of the Day">
+          <a href="/dashboards/my_speakers_of_the_day">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-microphone "></i>
+            </div>
+            <div class="visible-xs">Speakers of the Day</div>
+</a>        </li>
+
+
+<hr class="visible-xs">
+
+<li>
+    <div
+      data-container="body"
+      data-placement="right"
+      data-toggle="tooltip"
+      title="Slack">
+      <a target="_blank" href="https://holberton-school-org.slack.com">
+        <div class="image slack">
+          <div class="inner"></div>
+        </div>
+        <div class="visible-xs">Slack</div>
+</a>    </div>
+
+    <div
+      data-container="body"
+      data-placement="right"
+      data-toggle="modal"
+      data-target="#search-modal"
+      title="Search">
+      <a href="#">
+          <div class="icon" data-toggle="tooltip" data-placement="right" data-container="body" title="Search">
+            <i aria-hidden="true" class="fa fa-search "></i>
+          </div>
+        <div class="visible-xs">Search</div>
+</a>    </div>
+
+  <div
+    data-container="body"
+    data-placement="right"
+    data-toggle="tooltip"
+    title="My Profile">
+    <a href="/users/my_profile">
+        <div class="image ">
+          <div class="inner" style="background-image: url('https://s3.eu-west-3.amazonaws.com/hbtn.intranet/users/photos/000/011/468/thumb/IMG_3452.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20251028%2Feu-west-3%2Fs3%2Faws4_request&amp;X-Amz-Date=20251028T080135Z&amp;X-Amz-Expires=600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=6cfc613a9987d29f143593e79a6a0a35404c33a49b2c8f056dc59617704284a6')"></div>
+        </div>
+
+      <div class="visible-xs">My Profile</div>
+</a>  </div>
+</li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      <div class="hidden-xs navigation sidebar">
+  <a class="logo-container" href="/">
+    <div class="logo"></div>
+</a>
+  <ul>
+    
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Help">
+      <a target="_blank" href="https://students-support.hbtn.io/hc">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-info-circle "></i>
+        </div>
+        <div class="visible-xs">Help</div>
+</a>    </li>
+
+
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Projects" id="sidebar-current-projects-item">
+      <a href="/projects/current">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-code-fork "></i>
+        </div>
+        <div class="visible-xs">Projects</div>
+</a>    </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="My reports">
+        <a href="/users/my_reports">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-sticky-note-o "></i>
+          </div>
+          <div class="visible-xs">My reports</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="QA Reviews I can make">
+        <a href="/corrections/to_review">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-check "></i>
+          </div>
+          <div class="visible-xs">QA Reviews I can make</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Mock interviews">
+        <a href="/dashboards/my_current_reefineries">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-commenting-o "></i>
+          </div>
+          <div class="visible-xs">Mock interviews</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Evaluation quizzes">
+        <a href="/dashboards/my_current_evaluation_quizzes">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-question "></i>
+          </div>
+          <div class="visible-xs">Evaluation quizzes</div>
+</a>      </li>
+
+    <hr title="My resources">
+
+    <li data-container="body" data-placement="right" data-toggle="tooltip" title="Concepts" id="sidebar-concepts-item">
+      <a href="/concepts">
+        <div class="icon">
+          <i aria-hidden="true" class="fa fa-file-text "></i>
+        </div>
+        <div class="visible-xs">Concepts</div>
+</a>    </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Servers">
+        <a href="/servers">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-server "></i>
+          </div>
+          <div class="visible-xs">Servers</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Sandboxes" id="sidebar-dashboards-my-containers">
+        <a href="/user_sandboxes">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-terminal "></i>
+          </div>
+          <div class="visible-xs">Sandboxes</div>
+</a>      </li>
+      <li data-container="body" data-placement="right" data-toggle="tooltip" title="Tools">
+        <a href="/dashboards/my_tools">
+          <div class="icon">
+            <i aria-hidden="true" class="fa fa-wrench "></i>
+          </div>
+          <div class="visible-xs">Tools</div>
+</a>      </li>
+
+      <hr title="My campus">
+
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Peers">
+          <a href="/users/peers">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-users "></i>
+            </div>
+            <div class="visible-xs">Peers</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Captain's Logs">
+          <a href="/dashboards/my_captain_log">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-book "></i>
+            </div>
+            <div class="visible-xs">Captain's Logs</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Officers">
+          <a href="/dashboards/my_officers">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-building "></i>
+            </div>
+            <div class="visible-xs">Officers</div>
+</a>        </li>
+        <li data-container="body" data-placement="right" data-toggle="tooltip" title="Speakers of the Day">
+          <a href="/dashboards/my_speakers_of_the_day">
+            <div class="icon">
+              <i aria-hidden="true" class="fa fa-microphone "></i>
+            </div>
+            <div class="visible-xs">Speakers of the Day</div>
+</a>        </li>
+
+
+<hr class="visible-xs">
+
+<li>
+    <div
+      data-container="body"
+      data-placement="right"
+      data-toggle="tooltip"
+      title="Slack">
+      <a target="_blank" href="https://holberton-school-org.slack.com">
+        <div class="image slack">
+          <div class="inner"></div>
+        </div>
+        <div class="visible-xs">Slack</div>
+</a>    </div>
+
+    <div
+      data-container="body"
+      data-placement="right"
+      data-toggle="modal"
+      data-target="#search-modal"
+      title="Search">
+      <a href="#">
+          <div class="icon" data-toggle="tooltip" data-placement="right" data-container="body" title="Search">
+            <i aria-hidden="true" class="fa fa-search "></i>
+          </div>
+        <div class="visible-xs">Search</div>
+</a>    </div>
+
+  <div
+    data-container="body"
+    data-placement="right"
+    data-toggle="tooltip"
+    title="My Profile">
+    <a href="/users/my_profile">
+        <div class="image ">
+          <div class="inner" style="background-image: url('https://s3.eu-west-3.amazonaws.com/hbtn.intranet/users/photos/000/011/468/thumb/IMG_3452.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20251028%2Feu-west-3%2Fs3%2Faws4_request&amp;X-Amz-Date=20251028T080135Z&amp;X-Amz-Expires=600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=6cfc613a9987d29f143593e79a6a0a35404c33a49b2c8f056dc59617704284a6')"></div>
+        </div>
+
+      <div class="visible-xs">My Profile</div>
+</a>  </div>
+</li>
+
+
+  </ul>
+</div>
+
+    <main>
+      <div id="layout-bars">
+        <div class="px-5 py-3" id="student-switch-curriculum">
+  <div class="dropdown d-flex flex-column gap-1">
+    <span class="fs-small text-muted">Curriculum</span>
+    <div aria-haspopup="true" aria-expanded="false" class="align-items-center d-flex gap-3" data-toggle="dropdown" id="student-switch-curriculum-dropdown" role="button">
+      <div class="d-flex flex-column" style="line-height: 16px">
+        <span class="fs-4 fw-600">
+            [C#27]
+          HBnB v2
+        </span>
+        <span class="fs-small text-muted">
+          Average: <span class="fw-500">100.0%</span>
+        </span>
+      </div>
+      <div class="d-flex flex-column justify-content-center">
+        <span style="margin-bottom: -4px">
+          <i aria-hidden="true" class="fa fa-angle-up  fa-fw"></i>
+        </span>
+        <span style="margin-top: -4px">
+          <i aria-hidden="true" class="fa fa-angle-down  fa-fw"></i>
+        </span>
+      </div>
+    </div>
+    <ul aria-labelledby="student-switch-curriculum-dropdown" class="dropdown-menu fs-5">
+        <li>
+          <a class="" href="/curriculums/526/observe/69530">
+            <div class="align-items-center d-flex py-2">
+              <div class="d-flex flex-column" style="line-height: 16px">
+                <span class="fs-4 fw-500">
+                    [C#27]
+                  Foundations v2.1 - Part 1
+                </span>
+                <span class="text-muted">
+                  Average: <span class="fw-500">92.88%
+                          </span>
+                </span>
+              </div>
+            </div>
+</a>        </li>
+        <li>
+          <a class="" href="/curriculums/441/observe/69815">
+            <div class="align-items-center d-flex py-2">
+              <div class="d-flex flex-column" style="line-height: 16px">
+                <span class="fs-4 fw-500">
+                    [C#27]
+                  IBM Certificates - France
+                </span>
+                <span class="text-muted">
+                  Average: <span class="fw-500">100.0%
+                          </span>
+                </span>
+              </div>
+            </div>
+</a>        </li>
+        <li>
+          <a class="" href="/curriculums/392/observe/83721">
+            <div class="align-items-center d-flex py-2">
+              <div class="d-flex flex-column" style="line-height: 16px">
+                <span class="fs-4 fw-500">
+                    [C#27]
+                  HBnB v2
+                </span>
+                <span class="text-muted">
+                  Average: <span class="fw-500">100.0%
+                          </span>
+                </span>
+              </div>
+                <span class="fw-600 text-info" style="margin-left: 42px">
+                  <i aria-hidden="true" class="fa fa-check "></i>
+                </span>
+            </div>
+</a>        </li>
+        <li>
+          <a class="" href="/curriculums/502/observe/83936">
+            <div class="align-items-center d-flex py-2">
+              <div class="d-flex flex-column" style="line-height: 16px">
+                <span class="fs-4 fw-500">
+                    [C#27]
+                  Foundations v2.1 - Part 2
+                </span>
+                <span class="text-muted">
+                  Average: <span class="fw-500">94.78%
+                          </span>
+                </span>
+              </div>
+            </div>
+</a>        </li>
+        <li>
+          <a class="" href="/curriculums/423/observe/84098">
+            <div class="align-items-center d-flex py-2">
+              <div class="d-flex flex-column" style="line-height: 16px">
+                <span class="fs-4 fw-500">
+                    [C#27]
+                  RNCP 5 - Parcours de préparation
+                </span>
+                <span class="text-muted">
+                  Average: <span class="fw-500">%
+                          </span>
+                </span>
+              </div>
+            </div>
+</a>        </li>
+    </ul>
+  </div>
+</div>
+
+        
+        
+        
+      </div>
+      <article class="">
+        
+<div class="project row container-max">
+
+    <div class="sm-gap">
+    <div data-react-class="projects/ProjectHeader" data-react-props="{&quot;metadata&quot;:{&quot;level&quot;:&quot;Novice&quot;,&quot;author&quot;:&quot;HBTN&quot;,&quot;weight&quot;:1,&quot;migrated_to_sasheck&quot;:true,&quot;team&quot;:{&quot;in_team_of&quot;:3,&quot;members&quot;:[&quot;Daniel Ramirez&quot;,&quot;Flora Salanson&quot;,&quot;Moussa Elisoltanov&quot;]},&quot;correction&quot;:{&quot;released&quot;:false,&quot;requires_manual_correction&quot;:true}},&quot;project&quot;:{&quot;completion&quot;:0.0,&quot;id&quot;:3212,&quot;index&quot;:0,&quot;isAccessible&quot;:true,&quot;isOptional&quot;:false,&quot;imagePath&quot;:&quot;/assets/pathway/001_color-bb105595db22648e67fe1bf13ccc170165764f9c481034cdfd49dbb416af34af.png&quot;,&quot;name&quot;:&quot;HBnB - Auth \u0026 DB&quot;,&quot;score&quot;:{&quot;mandatory&quot;:null,&quot;optional&quot;:null},&quot;tasksCount&quot;:0},&quot;slackLink&quot;:null,&quot;tags&quot;:[],&quot;videoRoomLink&quot;:null}" data-react-cache-id="projects/ProjectHeader-0"></div>
+  </div>
+
+
+  <div id="project_id" class="d-none" data-project-id="3212"></div>
+
+
+
+    <div>
+      <ul class="nav nav-pills nav-justified" role="tablist">
+          <li class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+      </ul>
+      <div class="tab-content mt-4">
+        <div role="tabpanel" class="tab-pane active" id="description">
+          <div class="panel panel-default position-relative" id="project-description">
+  <a id="btn-scroll-to-tasks" href="#" class="btn btn-primary fixed-button hidden-xs">
+    Go to tasks <i class="ml-1 fa fa-arrow-down"></i>
+  </a>
+  <div class="panel-body text-justify">
+    <h3>Part 3: Enhanced Backend with Authentication and Database Integration</h3>
+
+<p>Welcome to Part 3 of the <strong>HBnB Project</strong>, where you will extend the backend of the application by introducing <strong>user authentication</strong>, <strong>authorization</strong>, and <strong>database integration</strong> using <strong>SQLAlchemy</strong> and <strong>SQLite</strong> for development. Later, you&rsquo;ll configure <strong>MySQL</strong> for production environments. In this part, you will secure the backend, introduce persistent storage, and prepare the application for a scalable, real-world deployment.</p>
+
+<h4>Objectives of the Project</h4>
+
+<ol>
+<li><strong>Authentication and Authorization</strong>: Implement JWT-based user authentication using <strong>Flask-JWT-Extended</strong> and role-based access control with the <code>is_admin</code> attribute for specific endpoints.</li>
+<li><strong>Database Integration</strong>: Replace in-memory storage with <strong>SQLite</strong> for development using <strong>SQLAlchemy</strong> as the ORM and prepare for <strong>MySQL</strong> or other production grade <strong>RDBMS</strong>.</li>
+<li><strong>CRUD Operations with Database Persistence</strong>: Refactor all CRUD operations to interact with a persistent database.</li>
+<li><strong>Database Design and Visualization</strong>: Design the database schema using <strong>mermaid.js</strong> and ensure all relationships between entities are correctly mapped.</li>
+<li><strong>Data Consistency and Validation</strong>: Ensure that data validation and constraints are properly enforced in the models.</li>
+</ol>
+
+<h4>Learning Objectives</h4>
+
+<p>By the end of this part, you will:</p>
+
+<ul>
+<li>Implement <strong>JWT authentication</strong> to secure your API and manage user sessions.</li>
+<li>Enforce <strong>role-based access control</strong> to restrict access based on user roles (regular users vs. administrators).</li>
+<li>Replace in-memory repositories with a <strong>SQLite-based persistence layer</strong> using <strong>SQLAlchemy</strong> for development and configure <strong>MySQL</strong> for production.</li>
+<li>Design and visualize a <strong>relational database schema</strong> using <strong>mermaid.js</strong> to handle relationships between users, places, reviews, and amenities.</li>
+<li>Ensure the backend is secure, scalable, and provides reliable data storage for production environments.</li>
+</ul>
+
+<h4>Project Context</h4>
+
+<p>In the previous parts of the project, you worked with in-memory storage, which is ideal for prototyping but insufficient for production environments. In Part 3, you&rsquo;ll transition to <strong>SQLite</strong>, a lightweight relational database, for development, while preparing the system for <strong>MySQL</strong> in production. This will give you hands-on experience with real-world database systems, allowing your application to scale effectively.</p>
+
+<p>Additionally, you&rsquo;ll introduce <strong>JWT-based authentication</strong> to secure the API, ensuring that only authenticated users can interact with certain endpoints. You will also implement role-based access control to enforce restrictions based on the user&rsquo;s privileges (regular users vs. administrators).</p>
+
+<h4>Project Resources</h4>
+
+<p>Here are some resources that will guide you through this part of the project:</p>
+
+<ul>
+<li><strong>JWT Authentication</strong>: <a href="/rltoken/hNpyB_ihhA0mLNObEX6U2w" title="Flask-JWT-Extended Documentation" target="_blank">Flask-JWT-Extended Documentation</a></li>
+<li><strong>SQLAlchemy ORM</strong>: <a href="/rltoken/Pj5Gl_MHxDjnsFg5LJUjog" title="SQLAlchemy Documentation" target="_blank">SQLAlchemy Documentation</a></li>
+<li><strong>SQLite</strong>: <a href="/rltoken/QxJlLn0K5h1D4_uSbGem1w" title="SQLite Documentation" target="_blank">SQLite Documentation</a></li>
+<li><strong>Flask Documentation</strong>: <a href="/rltoken/DtCMZDfZJctI--h3hpz93A" title="Flask Official Documentation" target="_blank">Flask Official Documentation</a></li>
+<li><strong>Mermaid.js for ER Diagrams</strong>: <a href="/rltoken/OyO339DAgpa8GZVo9LVMDg" title="Mermaid.js Documentation" target="_blank">Mermaid.js Documentation</a></li>
+</ul>
+
+<h4>Structure of the Project</h4>
+
+<p>In this part of the project, the tasks are organized in a way that builds progressively towards a complete, secure, and database-backed backend system:</p>
+
+<ol>
+<li><strong>Modify the User Model to Include Password</strong>: You will start by modifying the <code>User</code> model to store passwords securely using bcrypt2 and update the user registration logic.</li>
+<li><strong>Implement JWT Authentication</strong>: Secure the API using JWT tokens, ensuring only authenticated users can access protected endpoints.</li>
+<li><strong>Implement Authorization for Specific Endpoints</strong>: You will implement role-based access control to restrict certain actions (e.g., admin-only actions).</li>
+<li><strong>SQLite Database Integration</strong>: Transition from in-memory data storage to <strong>SQLite</strong> as the persistent database during development.</li>
+<li><strong>Map Entities Using SQLAlchemy</strong>: Map existing entities (<code>User</code>, <code>Place</code>, <code>Review</code>, <code>Amenity</code>) to the database using SQLAlchemy and ensure relationships are well-defined.</li>
+<li><strong>Prepare for MySQL in Production</strong>: Towards the end of this phase, you’ll configure the application to use <strong>MySQL</strong> in production and <strong>SQLite</strong> for development.</li>
+<li><strong>Database Design and Visualization</strong>: Use <strong>mermaid.js</strong> to create entity-relationship diagrams for your database schema.</li>
+</ol>
+
+<p>Each task is carefully designed to build on previous work and ensure the system transitions smoothly from development to production readiness.</p>
+
+<p>By the end of Part 3, you will have a backend that not only stores data in a persistent and secure database but also ensures that only authorized users can access and modify specific data. You will have implemented industry-standard authentication and database management practices that are crucial for real-world web applications.</p>
+
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+        <h2 id="task-container" class="gap">Tasks</h2>
+  
+  <div class="col-sm-12 col-md-12 col-lg-8 xol-xl-9">
+      <div data-role="task31676" data-position="1" id="task-num-0">
+        <div class="panel panel-default task-card " id="task-31676">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      0. Modify the Application Factory to Include the Configuration
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Update the Flask Application Factory to include the configuration object.</p>
+
+<h4>Context</h4>
+
+<p>In the previous part of the project, we created a <code>Config</code> class to handle different configurations in the application, but we weren&rsquo;t using it yet. In this task, you will update the <code>create_app()</code> method (following the Application Factory pattern) in the <code>app/__init__.py</code> file to receive a configuration, which will be used to instantiate the application.</p>
+
+<p><strong>IMPORTANT</strong>: Before starting the task, be sure to read and understand the resources provided below.</p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/Bc-ea98m6zITsaRy21VZmg" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ul>
+<li><strong>Flask Documentation:</strong> <a href="/rltoken/x54OVRFTTZ4UMiYZKt_o0g" title="Application Factories" target="_blank">Application Factories</a></li>
+<li><strong>Flask Documentation:</strong> <a href="/rltoken/GhquYUE37T2GK_Sfyx2Qfw" title="Configuration Handling" target="_blank">Configuration Handling</a></li>
+</ul>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you should have a fully functional Application Factory that can handle different configurations.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31676" data-batch-id="1063" data-toggle="modal" data-target="#task-31676-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31676-users-done-modal" data-task-id="31676" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "0. Modify the Application Factory to Include the Configuration"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31676-score-info-score">0</span>/5
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31657" data-position="2" id="task-num-1">
+        <div class="panel panel-default task-card " id="task-31657">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      1.  Modify the User Model to Include Password Hashing
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Update the <code>User</code> model to securely store a hashed password using <strong>bcrypt</strong>. Modify the user registration endpoint to accept the <code>password</code> field and ensure that it is hashed before storing it. The password should <strong>not</strong> be returned in any <code>GET</code> requests.</p>
+
+<h4>Context</h4>
+
+<p>In previous tasks, the <code>User</code> model was created, but it did not handle passwords. In this task, you will enhance the <code>User</code> model to support password hashing using <strong>bcrypt</strong>, ensuring passwords are securely stored. Additionally, you will update the user registration endpoint to accept and hash passwords before storing them. Passwords will not be returned in any <code>GET</code> requests.</p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/24aH6D7PN5fFQO6ZyHAzHw" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ul>
+<li><strong>Flask-Bcrypt Documentation:</strong> <a href="/rltoken/gTU_24Qo9Ub_kxN2Lj5qXA" title="Flask-Bcrypt" target="_blank">Flask-Bcrypt</a></li>
+<li><strong>Password Hashing Best Practices:</strong> <a href="/rltoken/7iwgHsol9F7lw-JPHDNbag" title="OWASP Password Storage Cheat Sheet" target="_blank">OWASP Password Storage Cheat Sheet</a></li>
+</ul>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, the <code>User</code> model will securely hash and store passwords using <strong>bcrypt</strong>. The <code>POST /api/v1/users/</code> endpoint will accept passwords and securely hash them before storing. Passwords will not be returned in any <code>GET</code> requests.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31657" data-batch-id="1063" data-toggle="modal" data-target="#task-31657-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31657-users-done-modal" data-task-id="31657" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "1.  Modify the User Model to Include Password Hashing"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31657-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31675" data-position="3" id="task-num-2">
+        <div class="panel panel-default task-card " id="task-31675">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      2. Implement JWT Authentication with `flask-jwt-extended`
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Set up JWT-based authentication for the HBnB application, enabling secure login functionality. This task involves configuring the API to generate and verify JWT tokens using the <code>flask-jwt-extended</code> extension. Tokens will be issued upon successful login and required for accessing protected endpoints.</p>
+
+<h4>Context</h4>
+
+<p>JWT (JSON Web Token) allows secure authentication by providing a token that clients can use to access protected resources without having to re-authenticate on every request. JWT is stateless, meaning the server doesn’t need to store user sessions, making it ideal for scalable applications. JWT tokens also allow embedding additional claims (such as user roles), which is useful for authorization. </p>
+
+<p>In this task, we will set up user login, issue JWT tokens, and use these tokens to protect specific API endpoints.</p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/j8VM9JfcNs01NVLyMm2viA" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ul>
+<li><strong>JWT Authentication</strong>: <a href="/rltoken/1Zfi01jG-15WBptHE0oUYg" title="JWT.io" target="_blank">JWT.io</a></li>
+<li><strong>Flask-JWT-Extended Documentation:</strong> <a href="/rltoken/hNpyB_ihhA0mLNObEX6U2w" title="Flask-JWT-Extended" target="_blank">Flask-JWT-Extended</a></li>
+<li><strong>JWT Best Practices:</strong> <a href="/rltoken/E-CO7HzniUddkGCKhbIPLg" title="OWASP JWT Security" target="_blank">OWASP JWT Security</a></li>
+</ul>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, students will have implemented user login functionality using JWT. They will be able to generate and verify JWT tokens, protect specific API endpoints, and embed claims (like <code>is_admin</code>) within the token for future authorization checks.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31675" data-batch-id="1063" data-toggle="modal" data-target="#task-31675-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31675-users-done-modal" data-task-id="31675" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "2. Implement JWT Authentication with `flask-jwt-extended`"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31675-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31677" data-position="4" id="task-num-3">
+        <div class="panel panel-default task-card " id="task-31677">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      3. Implement Authenticated User Access Endpoints
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Secure various API endpoints to allow only authenticated users to perform specific actions, including creating and modifying places and reviews, as well as updating their own user details. Access will be controlled via JWT authentication, with additional validation to ensure users can only modify data that belongs to them (e.g., places they own, reviews they created).</p>
+
+<h4>Context</h4>
+
+<p>Authenticated user access is a critical part of securing an API. By ensuring that only authorized users can perform specific actions, the integrity of the data is protected. This task focuses on securing endpoints related to creating and modifying places and reviews, while also allowing users to modify their own data.</p>
+
+<p>In this task, you will:</p>
+
+<ol>
+<li>Secure endpoints to ensure only authenticated users can create, update, and delete resources.</li>
+<li>Add logic to validate ownership of places and reviews.</li>
+<li>Implement logic to prevent users from reviewing places they own or reviewing a place multiple times.</li>
+<li>Verify that public users can access the <strong>PUBLIC</strong> endpoints without a JWT token.</li>
+</ol>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/4GsVk28JWrRkIkpwIkMpjQ" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>Flask-JWT-Extended Documentation:</strong> <a href="/rltoken/hNpyB_ihhA0mLNObEX6U2w" title="Flask-JWT-Extended" target="_blank">Flask-JWT-Extended</a></li>
+<li><strong>Testing REST APIs with cURL:</strong> <a href="/rltoken/yyPNqgoDby8hBhuGtVNMTQ" title="Everything cURL" target="_blank">Everything cURL</a></li>
+</ol>
+
+<hr>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, the following endpoints will be secured, allowing only authenticated users to perform actions based on their ownership of places and reviews:
+- Create, update, and delete places (with ownership checks).
+- Create and update reviews (with restrictions on reviewing owned places and duplicate reviews).
+- Modify user details (excluding email and password).</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31677" data-batch-id="1063" data-toggle="modal" data-target="#task-31677-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31677-users-done-modal" data-task-id="31677" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "3. Implement Authenticated User Access Endpoints"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31677-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31679" data-position="5" id="task-num-4">
+        <div class="panel panel-default task-card " id="task-31679">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      4. Implement Administrator Access Endpoints
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Restrict access to specific API endpoints so that only users with administrative privileges can perform certain actions. These actions include creating new users, modifying any user&rsquo;s details (including email and password), and adding or modifying amenities. Additionally, administrators can perform the same tasks as authenticated users without being restricted by ownership of places and reviews.</p>
+
+<h4>Context</h4>
+
+<p>Role-based access control (RBAC) is crucial in API security. Administrators have the highest level of privileges, and this task will allow them to bypass restrictions that regular users face. This includes the ability to manage any user or resource in the system. </p>
+
+<p>In this task, you will:</p>
+
+<ol>
+<li>Implement logic for restricting access to specific endpoints based on the user&rsquo;s role (<code>is_admin</code>).</li>
+<li>Ensure that administrators can manage user accounts, including creating and modifying user details.</li>
+<li>Allow administrators to bypass ownership restrictions for places and reviews.</li>
+</ol>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/eSHdDs1OXItYtPOuzH9IRw" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>Flask-JWT-Extended Documentation:</strong> <a href="/rltoken/hNpyB_ihhA0mLNObEX6U2w" title="Flask-JWT-Extended" target="_blank">Flask-JWT-Extended</a></li>
+<li><strong>Bcrypt Documentation:</strong> <a href="/rltoken/gTU_24Qo9Ub_kxN2Lj5qXA" title="Flask-Bcrypt" target="_blank">Flask-Bcrypt</a></li>
+</ol>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, admins will be able to:
+- Create new users.
+- Modify any user’s data, including email and password (with validation for unique emails).
+- Add and modify amenities.
+- Bypass ownership restrictions on places and reviews.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31679" data-batch-id="1063" data-toggle="modal" data-target="#task-31679-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31679-users-done-modal" data-task-id="31679" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "4. Implement Administrator Access Endpoints"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31679-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31680" data-position="6" id="task-num-5">
+        <div class="panel panel-default task-card " id="task-31680">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      5. Implement SQLAlchemy Repository
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Replace the in-memory repository with a SQLAlchemy-based repository for persistence. In this task, you will create the <code>SQLAlchemyRepository</code> and integrate it into the project for managing database interactions. This task will lay the foundation for further model mapping and database setup in subsequent tasks.</p>
+
+<h4>Context</h4>
+
+<p>In the previous parts of the project, the persistence layer was managed using an in-memory repository. This task introduces SQLAlchemy to persist data in an SQLite database during development, preparing the application for a production-ready relational database. The repository pattern remains the same, but the implementation will now interact with SQLAlchemy for all CRUD operations. Due to the fact that the database has not yet been initialized, this task focuses only on creating the repository. Model mapping and database initialization will follow in the next task.</p>
+
+<p>You will:</p>
+
+<ol>
+<li>Create the SQLAlchemy repository that implements the existing repository interface.</li>
+<li>Refactor the existing Facade to utilize the SQLAlchemy-based repository for user operations.</li>
+<li>Provide code and detailed instructions for integration, but no database initialization will be performed yet.</li>
+</ol>
+
+<p>Read this guide before start:  <a href="/rltoken/J6L6uH31gS4JNAhScJFz8g" title="Transitioning from In-Memory to Database Persistence: A Step-by-Step Guide" target="_blank">Transitioning from In-Memory to Database Persistence: A Step-by-Step Guide</a></p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/sK0n3kM05Df4KR5S0mjA1w" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ul>
+<li><strong>SQLAlchemy Documentation:</strong> <a href="/rltoken/M0hhR6-9sCsq9fPVw0hOXA" title="SQLAlchemy" target="_blank">SQLAlchemy</a></li>
+<li><strong>Flask-SQLAlchemy Documentation:</strong> <a href="/rltoken/T8I6eqSK9_j68fOMz0JPOw" title="Flask-SQLAlchemy" target="_blank">Flask-SQLAlchemy</a></li>
+</ul>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you will have implemented the <code>SQLAlchemyRepository</code> and refactored the Facade to use this new repository for data persistence. However, since the model mapping and database initialization will be performed in the next task, the actual integration testing will be delayed until the next step.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31680" data-batch-id="1063" data-toggle="modal" data-target="#task-31680-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31680-users-done-modal" data-task-id="31680" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "5. Implement SQLAlchemy Repository"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31680-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31681" data-position="7" id="task-num-6">
+        <div class="panel panel-default task-card " id="task-31681">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      6. Map the User Entity to SQLAlchemy Model
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Map the <code>User</code> entity to a SQLAlchemy model, ensuring the correct database relationships, attribute definitions, and CRUD operations are implemented. You will incorporate the ORM functionality within the repository layer, service layer (Facade), and API layer for full integration. The password hashing mechanism from the previous task should remain functional.</p>
+
+<h4>Context</h4>
+
+<p>In the previous task, the repository was updated to use SQLAlchemy for database persistence, replacing the in-memory repository. This task extends that functionality by mapping the <code>User</code> entity to the database using SQLAlchemy. The new <code>UserRepository</code> will be responsible for handling user-specific queries, enhancing the flexibility and maintainability of the application.
+As we&rsquo;re also using a BaseClass to handle the common attributes for all the Business Logic classes, we&rsquo;ll update this class first to manage the mapping.</p>
+
+<p>In this task, you will:</p>
+
+<ol>
+<li>Map the <code>BaseModel</code> class to a SQLAlchemy model, including the <code>id</code>, <code>created_at</code> and <code>updated_at</code> attributes.</li>
+<li>Map the <code>User</code> entity to a SQLAlchemy model, including attributes like <code>first_name</code>, <code>last_name</code>, <code>email</code>, <code>password</code>, and <code>is_admin</code>.</li>
+<li>Implement the <code>UserRepository</code> class to interact with the database using SQLAlchemy.</li>
+<li>Refactor the <code>Facade</code> to use the <code>UserRepository</code> for user-related operations.</li>
+</ol>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/PrmkuYTPTmcWGYUmzjvaEg" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>SQLAlchemy Documentation:</strong> <a href="/rltoken/M0hhR6-9sCsq9fPVw0hOXA" title="SQLAlchemy" target="_blank">SQLAlchemy</a></li>
+<li><strong>Flask-SQLAlchemy Documentation:</strong> <a href="/rltoken/T8I6eqSK9_j68fOMz0JPOw" title="Flask-SQLAlchemy" target="_blank">Flask-SQLAlchemy</a></li>
+<li><strong>Flask-Bcrypt Documentation:</strong> <a href="/rltoken/gTU_24Qo9Ub_kxN2Lj5qXA" title="Flask-Bcrypt" target="_blank">Flask-Bcrypt</a></li>
+<li><strong>Testing REST APIs with cURL:</strong> <a href="/rltoken/yyPNqgoDby8hBhuGtVNMTQ" title="Everything cURL" target="_blank">Everything cURL</a></li>
+</ol>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, the <code>User</code> entity will be fully mapped to a SQLAlchemy model, and the repository pattern will be updated to interact with the database using SQLAlchemy. You will have refactored the <code>Facade</code> to use the new <code>UserRepository</code>, and the application will now store user data in the database persistently.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31681" data-batch-id="1063" data-toggle="modal" data-target="#task-31681-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31681-users-done-modal" data-task-id="31681" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "6. Map the User Entity to SQLAlchemy Model"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31681-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31682" data-position="8" id="task-num-7">
+        <div class="panel panel-default task-card " id="task-31682">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      7. Map the Place, Review, and Amenity Entities
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Map the <code>Place</code>, <code>Review</code>, and <code>Amenity</code> entities to SQLAlchemy models. This task requires you to apply the knowledge gained from mapping the <code>User</code> entity in the previous task to these new entities. You will implement the core database attributes for each entity, and in subsequent tasks, relationships between entities will be defined. No relationships between these entities should be added at this point.</p>
+
+<h4>Context</h4>
+
+<p>In the previous tasks, you mapped the <code>User</code> entity and implemented the <code>UserRepository</code> to interact with the database through SQLAlchemy. Now, you will extend this mapping to the <code>Place</code>, <code>Review</code>, and <code>Amenity</code> entities. These mappings will prepare the foundation for the relationships that will be added later between places, reviews, amenities, and users.</p>
+
+<p>In this task, you will:</p>
+
+<ol>
+<li>Map the core attributes for <code>Place</code>, <code>Review</code>, and <code>Amenity</code> entities.</li>
+<li>Ensure that each entity has basic CRUD functionality through the repository pattern.</li>
+<li>Follow the same process you used to map the <code>User</code> entity in the previous tasks.</li>
+</ol>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/hcAklb34iRQVNKpfIjvTYg" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>SQLAlchemy Documentation:</strong> <a href="/rltoken/M0hhR6-9sCsq9fPVw0hOXA" title="SQLAlchemy" target="_blank">SQLAlchemy</a></li>
+<li><strong>Flask-SQLAlchemy Documentation:</strong> <a href="/rltoken/T8I6eqSK9_j68fOMz0JPOw" title="Flask-SQLAlchemy" target="_blank">Flask-SQLAlchemy</a></li>
+<li><strong>SQLAlchemy Relationship Patterns:</strong> <a href="/rltoken/L-1QN1ex2ow-Mg5G9owAug" title="SQLAlchemy ORM Relationships" target="_blank">SQLAlchemy ORM Relationships</a></li>
+</ol>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you should have mapped the <code>Place</code>, <code>Review</code>, and <code>Amenity</code> entities to SQLAlchemy models, ensuring that their basic attributes are stored in the database. The repositories and facade methods should be updated to handle CRUD operations for each entity. No relationships between entities should be implemented yet; this will be done in a later task.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31682" data-batch-id="1063" data-toggle="modal" data-target="#task-31682-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31682-users-done-modal" data-task-id="31682" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "7. Map the Place, Review, and Amenity Entities"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31682-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task31683" data-position="9" id="task-num-8">
+        <div class="panel panel-default task-card " id="task-31683">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      8. Map Relationships Between Entities Using SQLAlchemy
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Map the relationships between the entities using SQLAlchemy. You will define both one-to-many and many-to-many relationships and apply the appropriate constraints and foreign keys in the models. This task will serve as a foundation for linking related data in your application.</p>
+
+<h4>Context</h4>
+
+<p>Now that you have defined the core entities like <code>User</code>, <code>Place</code>, <code>Review</code>, and <code>Amenity</code>, it&rsquo;s time to establish relationships between these entities. These relationships reflect the connections between the real-world concepts represented by the entities (e.g., a <code>User</code> can own many <code>Places</code>, a <code>Place</code> can have many <code>Reviews</code>). Defining relationships in the database ensures that related data can be easily queried and manipulated in a structured way.</p>
+
+<p>In this task, you will define relationships between the entities, using SQLAlchemy’s ORM capabilities. Relationships like &ldquo;one-to-many&rdquo; and &ldquo;many-to-many&rdquo; allow for a clear and efficient organization of data, enforcing the logical structure of the database.</p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/OKijqQoaBLNqvdj087iNlA" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>SQLAlchemy Documentation:</strong> <a href="/rltoken/M0hhR6-9sCsq9fPVw0hOXA" title="SQLAlchemy" target="_blank">SQLAlchemy</a></li>
+<li><strong>Flask-SQLAlchemy Documentation:</strong> <a href="/rltoken/T8I6eqSK9_j68fOMz0JPOw" title="Flask-SQLAlchemy" target="_blank">Flask-SQLAlchemy</a></li>
+<li><strong>SQLAlchemy Relationship Patterns:</strong> <a href="/rltoken/L-1QN1ex2ow-Mg5G9owAug" title="SQLAlchemy ORM Relationships" target="_blank">SQLAlchemy ORM Relationships</a></li>
+</ol>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you will have successfully mapped the relationships between entities using SQLAlchemy. These relationships will ensure data integrity and allow efficient querying of related data, enabling complex operations such as retrieving all reviews for a place or all places owned by a user. The correct use of <code>relationship()</code>, <code>backref</code>, and foreign keys will establish clear, bidirectional links between your entities.</p>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="31683" data-batch-id="1063" data-toggle="modal" data-target="#task-31683-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-31683-users-done-modal" data-task-id="31683" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "8. Map Relationships Between Entities Using SQLAlchemy"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-31683-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task33151" data-position="10" id="task-num-9">
+        <div class="panel panel-default task-card " id="task-33151">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      9. SQL Scripts for Table Generation and Initial Data
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Create SQL scripts to generate the entire database schema for the HBnB project and populate it with initial data. The scripts should include all tables and relationships necessary to reflect the project’s model and insert the required initial data.</p>
+
+<h4>Context</h4>
+
+<p>In this task, you will focus on designing the database schema using raw SQL to generate tables and insert initial data. This includes creating tables for <code>User</code>, <code>Place</code>, <code>Review</code>, <code>Amenity</code>, and their relationships. The purpose of this task is to practice defining databases independently of any ORM, ensuring you understand how to design tables and relationships at the SQL level.</p>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/JvsMbx5E7wnwoMbpBrBM3Q" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>SQL Tutorial for Beginners</strong>: <a href="/rltoken/ot1pU-XDu5EpC8Ht3sY90g" title="W3Schools SQL Tutorial" target="_blank">W3Schools SQL Tutorial</a></li>
+</ol>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you should have:</p>
+
+<ul>
+<li>SQL scripts that generate the full database schema.</li>
+<li>Inserted an administrator user and amenities into the database.</li>
+<li>Tested CRUD operations to verify correct functionality of the schema and data.</li>
+</ul>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="33151" data-batch-id="1063" data-toggle="modal" data-target="#task-33151-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-33151-users-done-modal" data-task-id="33151" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "9. SQL Scripts for Table Generation and Initial Data"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-33151-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+      <div data-role="task33152" data-position="11" id="task-num-10">
+        <div class="panel panel-default task-card " id="task-33152">
+  <span id="user_id" data-id="11468"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      10. Generate Database Diagrams
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <span id="user_id" data-id="11468"></span>
+
+    <!-- Progress vs Score -->
+
+    <!-- Task Body -->
+    <h4>Objective</h4>
+
+<p>Create Entity-Relationship (ER) diagrams to visually represent the structure of the database schema for the HBnB project using <strong>Mermaid.js</strong>. This task will help ensure that the database schema is accurately reflected and consistent with previous parts of the project. Students will use Mermaid.js to visualize tables and their relationships in a readable format.</p>
+
+<h4>Context</h4>
+
+<p>Visualizing database relationships is crucial for understanding the connections between entities. ER diagrams provide a high-level overview of the database&rsquo;s structure and serve as an essential reference for further development or debugging. Mermaid.js is a tool that allows you to create these diagrams in markdown-like syntax, making it easy to integrate them into documentation and collaboration platforms like GitHub or GitLab.</p>
+
+<p>In this task, you will:</p>
+
+<ol>
+<li>Learn to use Mermaid.js to create ER diagrams.</li>
+<li>Generate diagrams that represent the <code>User</code>, <code>Place</code>, <code>Review</code>, <code>Amenity</code>, and <code>Place_Amenity</code> tables, along with their relationships.</li>
+<li>Ensure consistency in the schema visualization, using Mermaid.js as the primary tool for diagram generation.</li>
+</ol>
+
+<h4>Instructions</h4>
+
+<p>-&gt; <a href="/rltoken/vMYdF--CN0BwAp9fEn9IVw" title="Find the detailed instructions for this task here" target="_blank">Find the detailed instructions for this task here</a> &lt;-</p>
+
+<h4>Resources</h4>
+
+<ol>
+<li><strong>Mermaid.js Documentation</strong>: <a href="/rltoken/OyO339DAgpa8GZVo9LVMDg" title="Mermaid.js Official Docs" target="_blank">Mermaid.js Official Docs</a></li>
+<li><strong>Live Mermaid.js Editor</strong>: <a href="/rltoken/lxLb-vEIEJvo8eD8z24u5g" title="Mermaid Live Editor" target="_blank">Mermaid Live Editor</a></li>
+<li><strong>SQLAlchemy Relationship Documentation</strong>: <a href="/rltoken/OJ17OhMHA8VGi8kkiQ0UXQ" title="SQLAlchemy ORM Relationships" target="_blank">SQLAlchemy ORM Relationships</a></li>
+</ol>
+
+<hr>
+
+<h4>Expected Outcome</h4>
+
+<p>By the end of this task, you should have:</p>
+
+<ul>
+<li>Created an ER diagram in Mermaid.js that accurately represents the database schema for HBnB.</li>
+<li>Understood the various types of relationships (one-to-many, many-to-many) and how they are represented visually.</li>
+<li>Exported the diagram to be included in your project documentation.</li>
+</ul>
+
+  </div>
+
+  <div class="list-group">
+    <!-- Task URLs -->
+
+    <!-- Task Files -->
+
+    <!-- Task Text Area -->
+
+    <!-- Technical information -->
+      <div class="list-group-item">
+        <p><strong>Repo:</strong></p>
+        <ul>
+          <li>GitHub repository: <code>holbertonschool-hbnb</code></li>
+            <li>Directory: <code>part3</code></li>
+        </ul>
+      </div>
+
+    <!-- Self-paced manual review -->
+  </div>
+
+  <!-- Panel footer - Controls -->
+  <div class="panel-footer">
+      <div class="align-items-center d-flex justify-content-between">
+        
+<div>
+
+  <button class="student-task-done-by btn btn-default btn-sm" data-task-id="33152" data-batch-id="1063" data-toggle="modal" data-target="#task-33152-users-done-modal">
+    Help
+  </button>
+  <div class="modal fade users-done-modal" id="task-33152-users-done-modal" data-task-id="33152" data-batch-id="1063">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Students who are done with "10. Generate Database Diagrams"</h4>
+        </div>
+        <div class="modal-body">
+            <div class="list-group">
+            </div>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="error"></div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+        <div class="fs-4 text-right">
+            <strong class="text-primary">
+              <span id="task-33152-score-info-score">0</span>/10
+            </strong>
+            <span class="text-muted">pts</span>
+        </div>
+      </div>
+
+
+  </div>
+</div>
+
+<script>
+function toggleTaskFilePreview(fileId) {
+  const previewDiv = document.getElementById('task-preview-' + fileId);
+  const toggleButton = document.getElementById('task-preview-toggle-' + fileId);
+  
+  if (previewDiv.style.display === 'none') {
+    previewDiv.style.display = 'block';
+    toggleButton.textContent = 'Hide Preview';
+  } else {
+    previewDiv.style.display = 'none';
+    toggleButton.textContent = 'Show Preview';
+  }
+}
+</script>
+
+      </div>
+
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="d-flex justify-content-around">
+              <div>
+                <a data-toggle="tooltip" title="HBnB - BL and API" class="btn btn-primary" role="button" href="/projects/3211">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous project
+</a>              </div>
+              <form action=/corrections/1515396/skip method="post">
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value=-Z4tqd6HYgJap5ZAtKduiplHF0lhanFMEpIBLElrK6f7mudxkToMW4GPQfCKBOfoT6zugwSJt0OqEwKCfvbxQw
+                />
+                <button class="btn btn-warning" type="submit">
+                  Next project <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                </button>
+              </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+    <div class="col-sm-12 col-md-12 hidden-lg">
+        <div data-react-class="projects/ProjectReview" data-react-props="{&quot;style&quot;:&quot;line&quot;,&quot;correction&quot;:{&quot;statusURI&quot;:&quot;/corrections/1515396/status_self_paced.json&quot;,&quot;startReviewURI&quot;:&quot;/corrections/1515396/start_auto_review_self_paced.json&quot;},&quot;csrfToken&quot;:&quot;oSXREnf9fH5_sm9sEypPie8qIOYqwFqeAGHf7GwkWXWjIRvKOEASJ6SauNwticbrOcHZLE8jnJG44NxCW7mDkQ&quot;,&quot;nextProject&quot;:{&quot;details&quot;:{&quot;curriculum_completed&quot;:false,&quot;message&quot;:&quot;Next project: HBnB - Simple Web Client&quot;,&quot;uri&quot;:&quot;/projects/3213&quot;},&quot;fetchURI&quot;:&quot;/projects/3212/next&quot;},&quot;pollingInterval&quot;:10000,&quot;progress&quot;:{&quot;auto_review&quot;:{&quot;can_execute&quot;:true,&quot;completion&quot;:null,&quot;inability_to_execute_reason&quot;:null},&quot;tasks&quot;:[{&quot;id&quot;:31676,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:5,&quot;score&quot;:0}},{&quot;id&quot;:31657,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31675,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31677,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31679,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31680,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31681,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31682,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31683,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:33151,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:33152,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}}],&quot;summary&quot;:{&quot;completion&quot;:0.0,&quot;score&quot;:{&quot;mandatory&quot;:null,&quot;optional&quot;:null}},&quot;can_skip&quot;:true,&quot;can_start_peer_review&quot;:false},&quot;peerReview&quot;:{&quot;availableReviewersURI&quot;:&quot;/corrections/1515396/available_reviewers.json&quot;,&quot;canReviewPeerDirectly&quot;:true,&quot;correctCorrectionURI&quot;:&quot;https://intranet.hbtn.io/corrections/1515396/correct&quot;,&quot;qaReviewsURI&quot;:&quot;/corrections/to_review&quot;,&quot;readyForReviewURI&quot;:&quot;/corrections/1515396/toggle_ready_for_review.json&quot;,&quot;reviewDeadline&quot;:null,&quot;synchronousManualReview&quot;:false},&quot;project&quot;:{&quot;completion&quot;:0.0,&quot;id&quot;:3212,&quot;index&quot;:0,&quot;isAccessible&quot;:true,&quot;isOptional&quot;:false,&quot;imagePath&quot;:&quot;/assets/pathway/001_color-bb105595db22648e67fe1bf13ccc170165764f9c481034cdfd49dbb416af34af.png&quot;,&quot;name&quot;:&quot;HBnB - Auth \u0026 DB&quot;,&quot;score&quot;:{&quot;mandatory&quot;:null,&quot;optional&quot;:null},&quot;tasksCount&quot;:0},&quot;skipURI&quot;:&quot;/corrections/1515396/skip&quot;,&quot;taskLevelReviewTypeHumanized&quot;:null}" data-react-cache-id="projects/ProjectReview-0"></div>
+
+    </div>
+
+  <div class="col-xl-3 col-lg-4 hidden-xs hidden-sm hidden-md sticky-nav">
+          <div data-react-class="projects/ProjectReview" data-react-props="{&quot;style&quot;:&quot;column&quot;,&quot;correction&quot;:{&quot;statusURI&quot;:&quot;/corrections/1515396/status_self_paced.json&quot;,&quot;startReviewURI&quot;:&quot;/corrections/1515396/start_auto_review_self_paced.json&quot;},&quot;csrfToken&quot;:&quot;6ZWP4fUoZBlWH94dEJzLp2P6JInRaSJ1kJgzHURWblPrkUU5upUKQI03Ca0uP0LFtRHdQ7SK5HooGTCzc8u0tw&quot;,&quot;nextProject&quot;:{&quot;details&quot;:{&quot;curriculum_completed&quot;:false,&quot;message&quot;:&quot;Next project: HBnB - Simple Web Client&quot;,&quot;uri&quot;:&quot;/projects/3213&quot;},&quot;fetchURI&quot;:&quot;/projects/3212/next&quot;},&quot;pollingInterval&quot;:10000,&quot;progress&quot;:{&quot;auto_review&quot;:{&quot;can_execute&quot;:true,&quot;completion&quot;:null,&quot;inability_to_execute_reason&quot;:null},&quot;tasks&quot;:[{&quot;id&quot;:31676,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:5,&quot;score&quot;:0}},{&quot;id&quot;:31657,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31675,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31677,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31679,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31680,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31681,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31682,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:31683,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:33151,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}},{&quot;id&quot;:33152,&quot;progress_score&quot;:{&quot;progress&quot;:0.0,&quot;score&quot;:0.0},&quot;score_info&quot;:{&quot;passed&quot;:false,&quot;points&quot;:10,&quot;score&quot;:0}}],&quot;summary&quot;:{&quot;completion&quot;:0.0,&quot;score&quot;:{&quot;mandatory&quot;:null,&quot;optional&quot;:null}},&quot;can_skip&quot;:true,&quot;can_start_peer_review&quot;:false},&quot;peerReview&quot;:{&quot;availableReviewersURI&quot;:&quot;/corrections/1515396/available_reviewers.json&quot;,&quot;canReviewPeerDirectly&quot;:true,&quot;correctCorrectionURI&quot;:&quot;https://intranet.hbtn.io/corrections/1515396/correct&quot;,&quot;qaReviewsURI&quot;:&quot;/corrections/to_review&quot;,&quot;readyForReviewURI&quot;:&quot;/corrections/1515396/toggle_ready_for_review.json&quot;,&quot;reviewDeadline&quot;:null,&quot;synchronousManualReview&quot;:false},&quot;project&quot;:{&quot;completion&quot;:0.0,&quot;id&quot;:3212,&quot;index&quot;:0,&quot;isAccessible&quot;:true,&quot;isOptional&quot;:false,&quot;imagePath&quot;:&quot;/assets/pathway/001_color-bb105595db22648e67fe1bf13ccc170165764f9c481034cdfd49dbb416af34af.png&quot;,&quot;name&quot;:&quot;HBnB - Auth \u0026 DB&quot;,&quot;score&quot;:{&quot;mandatory&quot;:null,&quot;optional&quot;:null},&quot;tasksCount&quot;:0},&quot;skipURI&quot;:&quot;/corrections/1515396/skip&quot;,&quot;taskLevelReviewTypeHumanized&quot;:null}" data-react-cache-id="projects/ProjectReview-0"></div>
+
+
+    <div class="panel panel-default task-card " id="task-18584">
+      <span id="user_id" data-id="2303"></span>
+      <div class="panel-heading panel-heading-actions">
+        <h3 class="panel-title">
+          Tasks list
+        </h3>
+      </div>
+      <div class="panel-body task-list">
+          <ul class="nav nav-pills nav-justified" role="tablist">
+              <li class="active"><a href="#mandatory" role="tab" data-toggle="tab">Mandatory</a></li>
+              <li><a href="#advanced" role="tab" data-toggle="tab">Advanced</a></li>
+          </ul>
+          <div class="tab-content mt-4">
+            <div role="tabpanel" class="tab-pane active" id="mandatory">
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="0" id="heading-0">
+                    <div class="task-title-list">0. <code>Modify the Application Factory to Include the Configuration</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31676'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="1" id="heading-1">
+                    <div class="task-title-list">1. <code> Modify the User Model to Include Password Hashing</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31657'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="2" id="heading-2">
+                    <div class="task-title-list">2. <code>Implement JWT Authentication with `flask-jwt-extended`</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31675'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="3" id="heading-3">
+                    <div class="task-title-list">3. <code>Implement Authenticated User Access Endpoints</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31677'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="4" id="heading-4">
+                    <div class="task-title-list">4. <code>Implement Administrator Access Endpoints</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31679'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="5" id="heading-5">
+                    <div class="task-title-list">5. <code>Implement SQLAlchemy Repository</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31680'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="6" id="heading-6">
+                    <div class="task-title-list">6. <code>Map the User Entity to SQLAlchemy Model</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31681'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="7" id="heading-7">
+                    <div class="task-title-list">7. <code>Map the Place, Review, and Amenity Entities</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31682'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="8" id="heading-8">
+                    <div class="task-title-list">8. <code>Map Relationships Between Entities Using SQLAlchemy</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='31683'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="9" id="heading-9">
+                    <div class="task-title-list">9. <code>SQL Scripts for Table Generation and Initial Data</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='33151'></strong>
+                  </div>
+                  <div class="task-button d-flex align-center justify-content-between" role="button" data-task-index="10" id="heading-10">
+                    <div class="task-title-list">10. <code>Generate Database Diagrams</code></div>
+                    <strong class='task_progress_score text-primary ml-2' data-task-id='33152'></strong>
+                  </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="advanced">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="/assets/javascripts/application/custom/project_tasks.js"></script>
+
+
+      
+        <div class="modal fade" id="sandboxes-modal"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">Recommended Sandboxes</h4></div><div class="modal-body"><div data-react-class="user_sandboxes/Sandboxes" data-react-props="{&quot;images&quot;:[{&quot;id&quot;:130,&quot;name&quot;:&quot;Ubuntu 22.04 - Java&quot;,&quot;aws_region&quot;:&quot;South America (São Paulo)&quot;},{&quot;id&quot;:17,&quot;name&quot;:&quot;Ubuntu 22.04&quot;,&quot;aws_region&quot;:&quot;South America (São Paulo)&quot;},{&quot;id&quot;:14,&quot;name&quot;:&quot;Ubuntu 22.04&quot;,&quot;aws_region&quot;:&quot;Europe (Paris)&quot;},{&quot;id&quot;:18,&quot;name&quot;:&quot;Ubuntu 22.04&quot;,&quot;aws_region&quot;:&quot;Asia Pacific (Sydney)&quot;},{&quot;id&quot;:16,&quot;name&quot;:&quot;Ubuntu 22.04&quot;,&quot;aws_region&quot;:&quot;US East (N. Virginia)\t&quot;},{&quot;id&quot;:128,&quot;name&quot;:&quot;Ubuntu 22.04&quot;,&quot;aws_region&quot;:&quot;Middle East (UAE)&quot;},{&quot;id&quot;:129,&quot;name&quot;:&quot;Ubuntu 18.04&quot;,&quot;aws_region&quot;:&quot;Middle East (UAE)&quot;}],&quot;sandboxesUri&quot;:&quot;/user_sandboxes&quot;,&quot;csrfToken&quot;:&quot;JWcVyHT6hmktnNJicGpxoxYdyDSqhTHmZknRHfnUxBUnY98QO0foMPa0BdJOyfjBwPYx_s9m9-neyNKzzkke8Q&quot;,&quot;maxNumberOfContainers&quot;:2}" data-react-cache-id="user_sandboxes/Sandboxes-0"></div></div></div></div></div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="d-flex justify-content-around">
+              <div>
+                <a data-toggle="tooltip" title="HBnB - BL and API" class="btn btn-primary" role="button" href="/projects/3211">
+                  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Previous project
+</a>              </div>
+              <form action=/corrections/1515396/skip method="post">
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value=u-FCFSeLoo7bnNkh6xhoFNZ4HWZ126dZ9jmK9b_t-Ry55YjNaDbM1wC0DpHVu-F2AJPkrBA4YVZOuIlbiHAj-A
+                />
+                <button class="btn btn-warning" type="submit">
+                  Next project <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                </button>
+              </form>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+<script src="/assets/javascripts/applications/custom/project.js"></script>
+      </article>
+    </main>
+      <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-labelledby="search-modal-label">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="search-bar-container">
+    <input id="search-bar"
+            type="text"
+            name="hbtn-search-bar"
+            placeholder="✨Start search by typing in this field✨">
+</div>
+
+            </div>
+            <div class="modal-body">
+                <div id="modal-spinner" class="spinner gap">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+                <div id="search-results-container">
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="modal fade" id="markdownGuideModal" tabindex="-1" role="dialog" aria-labelledby="markdownGuideModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Markdown Guide</h4>
+        </div>
+        <div class="modal-body">
+            <h4>Emphasis</h4>
+<pre>**<strong>bold</strong>**
+*<em>italics</em>*
+~~<strike>strikethrough</strike>~~</pre>
+<h4>Headers</h4>
+<pre># Big header
+## Medium header
+### Small header
+#### Tiny header</pre>
+<h4>Lists</h4>
+<pre>* Generic list item
+* Generic list item
+* Generic list item
+
+1. Numbered list item
+2. Numbered list item
+3. Numbered list item</pre>
+<h4>Links</h4>
+<pre>[Text to display](http://www.example.com)</pre>
+<h4>Quotes</h4>
+<pre>> This is a quote.
+> It can span multiple lines!</pre>
+<h4>Images</h4>
+<p>CSS style available: <code>width, height, opacity</code></p>
+<pre>![](http://www.example.com/image.jpg)
+![](http://www.example.com/image.jpg | width: 200px)
+![](http://www.example.com/image.jpg | height: 124px | width: 80px | opacity: 0.6)
+</pre>
+<h4>Tables</h4>
+<pre>| Column 1 | Column 2 | Column 3 |
+| -------- | -------- | -------- |
+| John     | Doe      | Male     |
+| Mary     | Smith    | Female   |
+
+<em>Or without aligning the columns...</em>
+
+| Column 1 | Column 2 | Column 3 |
+| -------- | -------- | -------- |
+| John | Doe | Male |
+| Mary | Smith | Female |
+</pre>
+<h4>Displaying code</h4>
+<pre>`var example = "hello!";`
+
+<em>Or spanning multiple lines...</em>
+
+```
+var example = "hello!";
+alert(example);
+```</pre>
+        </div>
+    </div>
+  </div>
+</div>
+
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create',
+            'UA-67152800-6',
+            'auto', {
+              userId: '11468'
+            }
+          );
+
+        ga('send', 'pageview');
+
+        $(document).ready(function() {
+          ga(function(tracker) {
+            var clientId = tracker.get('clientId');
+            $('.ga-client-id').val(clientId);
+          });
+        });
+      </script>
+      
+        <div id="clippyAssistant"   data-id="11468"
+                            data-firstname="Moussa"
+                            data-batch-number="C#27"
+                            data-lastname="Elisoltanov"
+                            data-slack-id="U08URBZEABW"
+                            data-is-staff="false"
+                            data-location="Holberton Toulouse, France"
+                            data-project-id="3212"
+                            data-location-white-label="false"></div>
+<script type="module" src="https://clippy.hbtn.io/static/client/js/clippy/app.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"d1163884d5a044d38c1328f9536ab15b","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
