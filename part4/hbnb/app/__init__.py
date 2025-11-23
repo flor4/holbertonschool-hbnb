@@ -33,6 +33,7 @@ def create_app(config_class=DevelopmentConfig):
     CORS(app, resources={r"/api/*": {"origins": "http://localhost:8000"}}, supports_credentials=True)
 
 
+
     # Initialisation des extensions
     db.init_app(app)
     bcrypt.init_app(app)

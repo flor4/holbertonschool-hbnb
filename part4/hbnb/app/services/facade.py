@@ -130,6 +130,15 @@ class HBnBFacade:
     def get_all_reviews(self):
         return self.review_repo.get_all()
 
+    def get_user_review_for_place(self, user_id, place_id):
+
+        all_reviews = self.review_repo.get_all()
+        for review in all_reviews:
+            if review.user_id == user_id and review.place_id == place_id:
+                return review
+        return None
+
+
     # =====================
     # Amenity facade
     # =====================
